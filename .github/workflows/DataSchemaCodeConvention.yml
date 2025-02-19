@@ -1,19 +1,19 @@
-name: Data Schema Code Convention Check
+name: JSON Linter
+
 on:
   push:
-    paths:
-      - 'DataSchema.json'
+    branches:
+      - main  # або вкажи свою гілку, наприклад, LW11
 
 jobs:
-  validate:
+  json_linter_test:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
-    - name: Install ajv-cli for JSON Schema validation
-      run: npm install -g ajv-cli
-
-    - name: Validate JSON Schema
-      run: ajv validate -s DataSchema.json -d DataSchema.json
+    - name: Start JSON Linter
+      run: |
+        npm i -g @prantlf/jsonlint
+        jsonlint $GITHUB_WORKSPACE/DataSchema.json
