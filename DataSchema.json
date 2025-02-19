@@ -12,7 +12,7 @@
           "properties": {
             "id": { "type": "integer", "minimum": 1 },
             "name": { "type": "string", "minLength": 1, "maxLength": 255 },
-            "email": { "type": "string", "format": "email" }
+            "email": { "type": "string", "format": "not_a_valid_format" }
           },
           "required": ["id", "name", "email"]
         }
