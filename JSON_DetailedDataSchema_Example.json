@@ -1,0 +1,78 @@
+{
+    "title": "ShipFriendsRMS Database Schema",
+    "description": "JSON Schema для моделювання даних системи ShipFriendsRMS",
+    "type": "object",
+    "properties": {
+      "Users": {
+        "description": "Користувачі системи",
+        "type": "array",
+        "minItems": 1,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "name": { "type": "string", "minLength": 1, "maxLength": 255 },
+            "email": { "type": "string", "format": "email" }
+          },
+          "required": ["id", "name", "email"]
+        }
+      },
+      "Subscriptions": {
+        "description": "Підписки між користувачами",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "subscriber_id": { "type": "integer", "minimum": 1 },
+            "subscribed_to_id": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["id", "subscriber_id", "subscribed_to_id"]
+        }
+      },
+      "HousingRequests": {
+        "description": "Запити на житло",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "requester_id": { "type": "integer", "minimum": 1 },
+            "status": {
+              "type": "string",
+              "pattern": "^(pending|approved|rejected)$"
+            }
+          },
+          "required": ["id", "requester_id", "status"]
+        }
+      },
+      "Events": {
+        "description": "Список подій",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "title": { "type": "string", "minLength": 1, "maxLength": 255 },
+            "date": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+            "location": { "type": "string", "minLength": 1, "maxLength": 255 }
+          },
+          "required": ["id", "title", "date", "location"]
+        }
+      },
+      "EventRegistrations": {
+        "description": "Реєстрація користувачів на події",
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "integer", "minimum": 1 },
+            "user_id": { "type": "integer", "minimum": 1 },
+            "event_id": { "type": "integer", "minimum": 1 }
+          },
+          "required": ["id", "user_id", "event_id"]
+        }
+      }
+    }
+  }
+  
